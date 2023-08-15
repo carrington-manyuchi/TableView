@@ -8,12 +8,22 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    //MARK: - Variables
+    private let image: [UIImage] = [
+        UIImage(named: "caar")!
+    ]
+    
+    
+    //MARK: - UI Componets
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .blue
+
     }
 
+    //MARK: - Setup
 
 }
 
