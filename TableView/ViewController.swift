@@ -10,8 +10,16 @@ import UIKit
 class ViewController: UIViewController {
     
     //MARK: - Variables
-    private let image: [UIImage] = [
-        UIImage(named: "1")!
+    private let images: [UIImage] = [
+        UIImage(named: "1")!,
+        UIImage(named: "2")!,
+        UIImage(named: "3")!,
+        UIImage(named: "4")!,
+        UIImage(named: "5")!,
+        UIImage(named: "6")!,
+        UIImage(named: "7")!,
+        UIImage(named: "8")!
+        
     ]
     
     
@@ -21,7 +29,7 @@ class ViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemBackground
         tableView.allowsSelection = true
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.identifier)
         return tableView
     }()
 
@@ -57,12 +65,16 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return images.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "Carring ton"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell else {
+            fatalError("The tableView could not dequeue a Custom Cell in the View Controller")
+        }
+        let image =  self.images[indexPath.row]
+        cell.configure(with: image, and: indexPath.row.description)
+        
         return cell
         
     }
